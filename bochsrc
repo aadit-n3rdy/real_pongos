@@ -1,0 +1,10 @@
+config_interface: textconfig
+display_library: x
+floppya: 1_44=pongos.img, status=inserted
+log: bochs.log
+boot: a
+magic_break: enabled=1
+debug: action=ignore, pci=report
+info: action=report
+error: action=report
+panic: action=ask

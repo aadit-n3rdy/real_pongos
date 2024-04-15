@@ -1,0 +1,5 @@
+**.img
+**.iso
+obj/
+bochs.log
+.jukit/
