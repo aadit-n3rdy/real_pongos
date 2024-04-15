@@ -183,6 +183,54 @@ clearScreen:
 	pop bx
 	ret
 
+global drawBoundary
+drawBoundary:
+	; no inp params
+	push bp
+	mov bp, sp
+	pusha
+
+	mov bx, WIDTH/2 - BOUNDARY_WIDTH/2
+
+	.outer_begin:
+
+	mov ax, BOUNDARY_GAP
+
+	.middle_begin:
+
+	push ax
+
+	mov ax, BOUNDARY_WIDTH
+
+	.inner_begin:
+
+	mov byte [es:bx], 0x0f
+	inc bx
+
+	dec ax
+	cmp ax, 0
+	ja .inner_begin
+	.inner_end:
+
+	pop ax
+
+	add bx, WIDTH-BOUNDARY_WIDTH
+
+	dec ax
+	cmp ax, 0
+	ja .middle_begin
+	.middle_end:
+
+	add bx, WIDTH*(BOUNDARY_GAP+1)
+
+	cmp bx, WIDTH*HEIGHT
+	jb .outer_begin
+	.outer_end:
+
+	pop bp
+	popa
+	ret
+
 global swapBuffers
 swapBuffers:
 	push bp

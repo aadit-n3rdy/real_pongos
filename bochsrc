@@ -8,3 +8,4 @@ debug: action=ignore, pci=report
 info: action=report
 error: action=report
 panic: action=ask
+port_e9_hack: enabled=1, all_rings=1
