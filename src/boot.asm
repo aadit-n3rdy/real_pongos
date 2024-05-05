@@ -34,13 +34,12 @@ bootloader_start:
 	mov cl, 0x02	; Cylinder (2 bits), Sector
 	mov dl, [BOOT_DRIVE]
 	mov ah, 0x02	; Function (read from disk)
-	mov al, 0x01	; No. of sectors
+	mov al, 0x08	; No. of sectors
 	int 0x13
 
 	cmp ah, 0x00
 	jne error
 
-	;jmp 0x8000
 	call _start
 
 	jmp bootloader_hlt

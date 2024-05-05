@@ -3,5 +3,6 @@
 obj/
 bochs.log
 .jukit/
-output.mp4
+*.mp4
+*.ogv
 

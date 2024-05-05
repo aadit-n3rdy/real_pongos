@@ -21,7 +21,7 @@ SECTIONS {
 		*(.text)
 	}
 
-	.data : AT ( 0x200 + SIZEOF(.text) ) {
+	.data : AT (0x200+SIZEOF(.text)+1) {
 		*(.data)
 	}
 

@@ -4,9 +4,9 @@
 
 %define PADDING 1
 
-%define PADDLE_WIDTH 3
-%define PADDLE_LENGTH 30
-%define PADDLE_VELOCITY 3
+%define PADDLE_WIDTH 10
+%define PADDLE_LENGTH 50
+%define PADDLE_VELOCITY 1
 
 %define BOUNDARY_WIDTH 2
 %define BOUNDARY_GAP 8

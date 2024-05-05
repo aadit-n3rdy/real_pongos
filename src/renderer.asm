@@ -8,6 +8,7 @@ cur_page: db 1
 section .text
 
 global initGraphics
+align 4
 initGraphics:
 	mov ax, 0xA00
 	mov es, ax
@@ -15,6 +16,7 @@ initGraphics:
 	ret
 
 global drawTest
+align 4
 drawTest:
 	pusha
 	mov bx, 0x0
@@ -29,6 +31,7 @@ drawTest:
 	ret
 
 global drawPaddle
+align 4
 drawPaddle:
 	; arguments: position, L/R
 
@@ -112,36 +115,10 @@ drawPaddle:
 	.error:
 	popa 
 	pop bp
-	xchg bx, bx
-	xchg ax, ax
 	ret
-
-global drawBall
-drawBall:
-	; x
-	; y
-
-	; stack:
-	; old bp <- bp
-	; ret
-	; y
-	; x
-
-	push bp
-	mov bp, sp
-	pusha
-
-	mov ax, word [bp+4]
-	xor dx, dx
-	mov bx, WIDTH
-	imul bx
-
-	popa
-	pop bp
-	ret
-
 
 global clearScreen
+align 4
 clearScreen:
 	push bx
 	mov bx, WIDTH*HEIGHT-1
@@ -184,6 +161,7 @@ clearScreen:
 	ret
 
 global drawBoundary
+align 4
 drawBoundary:
 	; no inp params
 	push bp
@@ -232,6 +210,7 @@ drawBoundary:
 	ret
 
 global swapBuffers
+align 4
 swapBuffers:
 	push bp
 	mov bp, sp
@@ -252,8 +231,50 @@ swapBuffers:
 	jmp .loop_start
 	.loop_end:
 
-	pop bp
 	popa
+	pop bp
+	ret
+
+global drawBall
+align 4
+drawBall:
+	push bp
+	mov bp, sp
+	pusha
+
+	mov ax, [ss:bp+4] ;Y
+	mov bx, [ss:bp+6] ;X
+
+	add bx, 1
+
+	shr ax, 2
+	shr bx, 2
+
+	mov dx, 0x00
+	mov si, WIDTH 
+	imul si
+	add bx, ax
+
+	mov byte [es:bx], 0x0f
+	dec bx
+	mov byte [es:bx], 0x0f
+	add bx, 2
+	mov byte [es:bx], 0x0f
+	sub bx, WIDTH
+	mov byte [es:bx], 0x0f
+	dec bx
+	mov byte [es:bx], 0x0f
+	dec bx
+	mov byte [es:bx], 0x0f
+	add bx, WIDTH*2
+	mov byte [es:bx], 0x0f
+	inc bx
+	mov byte [es:bx], 0x0f
+	inc bx
+	mov byte [es:bx], 0x0f
+
+	popa
+	pop bp
 	ret
 
 delay:
