@@ -28,11 +28,11 @@ _start:
 	int 0x10
 
 
-	mov dword [ballX], WIDTH/2
-	mov dword [ballY], PADDLE_LENGTH*2
+	;mov dword [ballX], WIDTH/2
+	;mov dword [ballY], PADDLE_LENGTH*2
 
-	mov dword [ballVX], 1
-	mov dword [ballVY], 1
+	;mov dword [ballVX], 1
+	;mov dword [ballVY], 1
 
 	call initGraphics
 
@@ -160,7 +160,7 @@ global ballY
 global ballVX
 global ballVY
 align 4
-ballX:		dw 0
-ballY: 		dw 0
-ballVX:		dw 0
-ballVY:		dw 0
+ballX:		dw WIDTH*2
+ballY: 		dw HEIGHT*2
+ballVX:		dw 1
+ballVY:		dw 1
